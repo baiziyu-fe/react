@@ -200,6 +200,7 @@ export function applyDerivedStateFromProps(
 
 const classComponentUpdater = {
   isMounted,
+  //setState触发更新
   enqueueSetState(inst, payload, callback) {
     const fiber = getInstance(inst);
     const eventTime = requestEventTime();
@@ -268,6 +269,7 @@ const classComponentUpdater = {
       markStateUpdateScheduled(fiber, lane);
     }
   },
+  //forceUpdate触发更新
   enqueueForceUpdate(inst, callback) {
     const fiber = getInstance(inst);
     const eventTime = requestEventTime();
@@ -665,7 +667,7 @@ function constructClassInstance(
       }
     }
   }
-
+  //实例化创建的组件
   const instance = new ctor(props, context);
   const state = (workInProgress.memoizedState =
     instance.state !== null && instance.state !== undefined
